@@ -2,7 +2,7 @@ name: Deploy Vue 3 to GitHub Pages
 
 on:
   push:
-    branches: [main] # 监听 main 分支的推送
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,24 +16,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. 必须先安装 pnpm 环境
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # 或者写你本地对应的版本，如 9
+
+      # 2. 设置 Node.js，并开启 pnpm 缓存
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
+      # 3. 使用 pnpm 安装依赖
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
-      # 如果 ESLint 配置很严，这里报错会导致发布停止
-      # 如果想跳过检查强行发布，可以删掉这行或在 package.json 修改 build 命令
+      # 4. 打包项目
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Vite 默认打包输出目录是 dist
           path: dist
 
       - name: Deploy to GitHub Pages
