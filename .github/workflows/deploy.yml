@@ -1,0 +1,41 @@
+name: Deploy Vue 3 to GitHub Pages
+
+on:
+  push:
+    branches: [main] # 监听 main 分支的推送
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      # 如果 ESLint 配置很严，这里报错会导致发布停止
+      # 如果想跳过检查强行发布，可以删掉这行或在 package.json 修改 build 命令
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Vite 默认打包输出目录是 dist
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
