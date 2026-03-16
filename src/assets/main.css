@@ -1,0 +1,5 @@
+@import './base.css';
+@import 'tailwindcss';
+
+/* 引入排版插件 */
+@plugin "@tailwindcss/typography";
