@@ -1,7 +1,7 @@
 <template>
   <section>
     <div v-if="loading" class="flex justify-center pt-20">
-      <Loader />
+      <AppLoader />
     </div>
     <PostContent
       v-else-if="post"
@@ -15,7 +15,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import PostContent from '@/components/PostContent.vue'
-import Loader from '@/components/Loader.vue'
+import AppLoader from '@/components/AppLoader.vue'
 import { getPost } from '@/api/post'
 
 const props = defineProps(['id'])
@@ -23,7 +23,7 @@ const props = defineProps(['id'])
 const post = ref(null)
 const loading = ref(false)
 
-const fetchPost = async id => {
+const fetchPost = async (id) => {
   loading.value = true
   try {
     const res = await getPost({ id })

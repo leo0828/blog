@@ -1,7 +1,7 @@
 <template>
   <section>
     <div v-if="loading" class="flex justify-center pt-20">
-      <Loader />
+      <AppLoader />
     </div>
     <ul v-else>
       <li v-for="post in posts" :key="post.slug" class="py-7 border-b border-gray-200 relative">
@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import Loader from '@/components/Loader.vue'
+import AppLoader from '@/components/AppLoader.vue'
 import { getPosts } from '@/api/post'
 
 const posts = ref([])
