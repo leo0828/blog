@@ -1,13 +1,9 @@
-@font-face {
-  font-family: 'Space Grotesk Variable';
-  src: url('/fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-}
-
 body {
-  font-family: 'Space Grotesk Variable', 'HarmonyOS Sans SC', sans-serif;
-  font-weight: 300;
+  font-family: 'Outfit Variable', 'HarmonyOS Sans SC', 'PingFang SC', sans-serif;
+
+  /* 优化渲染 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 b,

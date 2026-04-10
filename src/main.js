@@ -1,3 +1,4 @@
+import '@fontsource-variable/outfit'
 import { createApp } from 'vue'
 import Highlight from './plugins/highlight'
 import './assets/main.css'
